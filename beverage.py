@@ -15,3 +15,6 @@ class Beverage:
     def price(self, value):
         self._price = value
 
+    def __str__(self) -> str:
+        return f'{self._name} ichimlik narxi {self._price}'
+

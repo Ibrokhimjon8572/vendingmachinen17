@@ -3,19 +3,26 @@ from beverage import Beverage
 class Qator:
     def __init__(self, number) -> None:
         self._number = number
-        self._name = ''
-        self._ichimliklist: list[Beverage] = []
+        self.ichimlik:Beverage = None
+        self._number_beverage:int = None
 
-    def add_beverage(self, beverage: Beverage):
-        # if self._name == beverage.name:
+    def add_beverage(self, beverage: Beverage, number_beverage):
         self._name = beverage.name
-        self._ichimliklist.append(beverage)
+        self.ichimlik = beverage
+        self._number_beverage = number_beverage
         return 'qo\'shildi'
-        # return 'qo\'sha olmadim'
     
-    def getlist(self):
-        for i in self._ichimliklist:
-            print(i.name, '-->', i.price)
+    def getinfo(self):
+        return f'{self._number} -- qatorda, {self.ichimlik}, ichimliklar soni {self._number_beverage}'
+
+    def get_price(self, name):
+        beverage = self.ichimlik
+        if beverage == None:
+            return None
+        elif name == beverage.name:
+            return self.ichimlik.price
+        return None
+
 
 
     

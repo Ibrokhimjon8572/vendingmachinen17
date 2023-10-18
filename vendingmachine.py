@@ -7,6 +7,21 @@ class VendingMachine:
         self.card_list: list[Card] = []
         self.qator_list = [Qator(i) for i in range(1, 7)]
 
+    # def sell(self, card_id, ichimlik_nomi):
+    #     if self.get_price(ichimlik_nomi) != -1.0:
+    #         for i in self.qator_list:
+    #             if i.ichimlik == None:
+    #                 continue
+    #             if i.ichimlik.name == ichimlik_nomi:
+    #                 i._number_beverage -= 1
+    #                 if self.get_credit(card_id) != -1.0:
+    #                     for j in self.card_list:
+    #                         if j._id == card_id:
+    #                             narx = self.get_price(ichimlik_nomi)
+    #                             return j.spend_money(narx)
+    #     else:
+    #         return -1.0
+
     def available_cans(self, name):
         count = 0
         for qator in self.qator_list:

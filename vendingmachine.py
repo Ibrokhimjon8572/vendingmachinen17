@@ -7,20 +7,10 @@ class VendingMachine:
         self.card_list: list[Card] = []
         self.qator_list = [Qator(i) for i in range(1, 7)]
 
-    # def sell(self, card_id, ichimlik_nomi):
-    #     if self.get_price(ichimlik_nomi) != -1.0:
-    #         for i in self.qator_list:
-    #             if i.ichimlik == None:
-    #                 continue
-    #             if i.ichimlik.name == ichimlik_nomi:
-    #                 i._number_beverage -= 1
-    #                 if self.get_credit(card_id) != -1.0:
-    #                     for j in self.card_list:
-    #                         if j._id == card_id:
-    #                             narx = self.get_price(ichimlik_nomi)
-    #                             return j.spend_money(narx)
-    #     else:
-    #         return -1.0
+    def assigne_card(self, card_id, summa):
+        for card in self.card_list:
+            if card._id == card_id and card.kredit < summa:
+                return -1
 
     def available_cans(self, name):
         count = 0
@@ -50,8 +40,29 @@ class VendingMachine:
     def get_credit(self, id):
         for card in self.card_list:
             if card._id == id:
-                return card.kretid
+                return card.kredit
         return -1.0
+
+    def helper(self, card_id, ichimlik_narxi, nomi):
+        for card in self.card_list:
+            if card._id == card_id:
+                card.spend_money(ichimlik_narxi)
+
+        for qator in self.qator_list:
+            if qator.ichimlik != None and qator.ichimlik.name == nomi:
+                qator._number_beverage -= 1
+
+    def sell(self, nomi, card_id):
+        ichimlik_narxi = self.get_price(nomi)
+        if ichimlik_narxi == -1.0:
+            return -1.0
+        elif self.get_credit(card_id) == -1.0:
+            return -1.0
+        elif self.assigne_card(card_id, ichimlik_narxi) == -1.0:
+            return -1.0
+        else:
+            self.helper(card_id, ichimlik_narxi, nomi)
+        
 
     def recharge_card(self, id, debit):
         for card in self.card_list:

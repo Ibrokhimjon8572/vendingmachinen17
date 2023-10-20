@@ -7,13 +7,11 @@ class Card:
         self._kredit += value
 
     def spend_money(self, value):
-        if self.kretid >= value:
+        if self._kredit >= value:
             self._kredit -= value
-        else:
-            return -1.0
 
     @property
-    def kretid(self):
+    def kredit(self):
         return self._kredit
 
     
